@@ -1,0 +1,35 @@
+Step 1: Open Powershell on start menu.
+        Choose your favorite way to open a powershell prompt. On Windows 10, I prefer to click the Windows Key, type 'power' and click enter.
+        
+Step 2: Start-Transcript to record your Powershell Session
+
+        #PS> Start-Transcript -path C:/Script/PingLog.txt -Append
+        
+        This command is one for your arsenal. Record everything that occurs in your powershell prompt, Never lose any of that work ever again!
+        I think this is pretty self explanatory, The Append flag is telling it to continue on if the file already exists, this isn't necessary,
+        and depends on how you would like to name/use the file. If you don't use this however, if the file exists already, it wipes it and starts over.
+        That's why I include it here.
+        
+Step 3: Ping.exe ... With a twist!
+
+        So here is the meat of our little guide. Lets timestamp that ping.
+
+        #PS> Ping.exe -t spiceworks.com | ForEach {"{0} - {1}" -f (Get-Date),$_}
+        
+        Lets break this down real quick.
+
+        Ping.exe - That's ping! powershell can use your CMD stuff just fine.
+        -t is as we all know, a continuous ping. can go before or after our hostname/IP address.
+
+        spiceworks.com is what we're pinging.
+
+        Next up is a pipe (|) - We're sending our information over to our next command.
+
+        Foreach is the next thing in our command here.
+
+        [{0} - {1} -f] - This is the text formatting.
+
+        (Get-Date) - This is the date! it's also what's going into {0} in the text formatting above.
+
+        $_ - This is you taking your previous input from ping and putting into {1}
+        
